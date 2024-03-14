@@ -27,11 +27,11 @@ Route::group([], function () {
 Route::group(['prefix' => 'cobrancas'], function () {
     Route::get('/', [App\Http\Controllers\CobrancasController::class, 'index']); 
     Route::post('/{cliente}', [App\Http\Controllers\CobrancasController::class, 'store']);
-    Route::get('/{cobranca}', 'CobrancaController@show'); 
-    Route::put('/{cobranca}', 'CobrancaController@update');
+    Route::get('/{cobranca}', [App\Http\Controllers\CobrancasController::class, 'show']); 
+    Route::patch('/{cobranca}', [App\Http\Controllers\CobrancasController::class, 'update']);
     Route::delete('/{cobranca}', [App\Http\Controllers\CobrancasController::class, 'destroy']); 
-    Route::get('/cliente/{cliente}', 'CobrancaController@indexByClient'); 
-    Route::get('/vencimento/{data}', 'CobrancaController@indexByDueDate'); 
+    Route::get('/cliente/{cliente}', [App\Http\Controllers\CobrancasController::class, 'indexByClient']); 
+    Route::get('/vencimento/{data}', [App\Http\Controllers\CobrancasController::class, 'indexByDueDate']); 
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
