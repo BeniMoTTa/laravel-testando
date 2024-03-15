@@ -31,7 +31,7 @@ Route::group(['prefix' => 'cobrancas'], function () {
     Route::patch('/{cobranca}', [App\Http\Controllers\CobrancasController::class, 'update']);
     Route::delete('/{cobranca}', [App\Http\Controllers\CobrancasController::class, 'destroy']); 
     Route::get('/cliente/{cliente}', [App\Http\Controllers\CobrancasController::class, 'indexByClient']); 
-    Route::get('/vencimento/{data}', [App\Http\Controllers\CobrancasController::class, 'indexByDueDate']); 
+    Route::get('/vencimento/{data_vencimento}', [App\Http\Controllers\CobrancasController::class, 'indexByDueDate']); 
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

@@ -25,9 +25,11 @@ class CobrancasController extends Controller
             'data_vencimento' => 'required|date',
             'status' => 'required|in:pendente,pago,cancelado',
             'descricao' => 'nullable|string',
-            'cliente_id' => 'nullable|integer|exists:clientes,id'
+            'cliente_id' => 'required|integer|exists:clientes,id',
         ]);
 
+
+        
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         }
@@ -49,7 +51,6 @@ class CobrancasController extends Controller
             'data_vencimento' => 'required|date',
             'status' => 'required|in:pendente,pago,cancelado',
             'descricao' => 'nullable|string',
-            'cliente_id' => 'required|integer|exists:clientes,id',
         ]);
 
         if ($validator->fails()) {
@@ -87,4 +88,5 @@ class CobrancasController extends Controller
 
         return Cobranca::where('data_vencimento', $request->data)->get();
     }
+    
 }

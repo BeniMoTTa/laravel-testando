@@ -95,4 +95,25 @@ class ClienteController extends Controller
         $cliente->delete();
         return response()->json(['success' => 'Cliente excluído com sucesso'], 200);
     }
+    
+    public function enviarMensagem(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'destinatario_id' => 'required|exists:clientes,id',
+        'conteudo' => 'required|string',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json($validator->errors(), 400);
+    }
+
+    $remetente_id = Auth::user()->id;
+    $mensagem = Mensagem::create([
+        'remetente_id' => $remetente_id,
+        'destinatario_id' => $request->destinatario_id,
+        'conteudo' => $request->conteudo,
+    ]);
+
+    return response()->json($mensagem, 201);
+}
 }
